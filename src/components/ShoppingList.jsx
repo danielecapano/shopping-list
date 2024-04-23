@@ -203,38 +203,40 @@ function ShoppingList() {
     
             {editingItem !== null && (
                     <div className="modal">
-                        <h3 className="title">Modifica articolo</h3>
-                        <input type="text"
-                        className="input-name"
-                        value={modalName}
-                        onChange={(e) => setModalName(e.target.value)}
-                        placeholder="Cosa vuoi comprare?"/>
-
-                        <div className="second-line">
-                            <input type="number"
-                            className="input-price"
-                            value={modalPrice}
-                            onChange={(e) => setModalPrice(e.target.value)}
-                            placeholder="Prezzo"/>
+                        <div className="modal-content">
+                            <h3 className="title">Modifica articolo</h3>
+                            <input type="text"
+                            className="input-name"
+                            value={modalName}
+                            onChange={(e) => setModalName(e.target.value)}
+                            placeholder="Cosa vuoi comprare?"/>
     
-                            <div className="quantity">
-                                <button className="btn-minus" onClick={removeModalQuantity}>
-                                    <FontAwesomeIcon icon={faMinus}/>
-                                </button>
+                            <div className="second-line">
                                 <input type="number"
-                                className="input-quantity"
-                                onChange={(e) => setModalQuantity(e.target.value)}
-                                value={modalQuantity} />
-                                <button className="btn-plus" onClick=       {addModalQuantity}>
-                                    <FontAwesomeIcon icon={faPlus}/>
-                                </button>
+                                className="input-price"
+                                value={modalPrice}
+                                onChange={(e) => setModalPrice(e.target.value)}
+                                placeholder="Prezzo"/>
+        
+                                <div className="quantity">
+                                    <button className="btn-minus" onClick={removeModalQuantity}>
+                                        <FontAwesomeIcon icon={faMinus}/>
+                                    </button>
+                                    <input type="number"
+                                    className="input-quantity"
+                                    onChange={(e) => setModalQuantity(e.target.value)}
+                                    value={modalQuantity} />
+                                    <button className="btn-plus" onClick=       {addModalQuantity}>
+                                        <FontAwesomeIcon icon={faPlus}/>
+                                    </button>
+                                </div>
                             </div>
-                        </div>
-                    
-                        {/* Pulsante per salvare le modifiche */}
-                        <div className="buttons">
-                            <button className="btn-reset" onClick={resetModifiedItem}>Annulla</button>
-                            <button className="btn-modify" onClick={saveModifiedItem}>Salva</button>
+                        
+                            {/* Pulsante per salvare le modifiche */}
+                            <div className="buttons">
+                                <button className="btn-reset" onClick={resetModifiedItem}>Annulla</button>
+                                <button className="btn-modify" onClick={saveModifiedItem}>Salva</button>
+                            </div>
                         </div>
                     </div>
                 )}

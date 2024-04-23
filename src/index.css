@@ -64,7 +64,7 @@ main {
 
 .title {
   text-align: center;
-  font-size: 1.25rem;
+  font-size: 1.5rem;
   padding-block: 1rem;
 }
 
@@ -252,13 +252,23 @@ input::-webkit-inner-spin-button {
 
 .modal {
   position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  width: calc(100% - 3rem);
-  padding: 1rem;
-  background-color: var(--white);
-  box-shadow: var(--shadow);
+  display: grid;
+  place-items: center;
+  inset: 0;
+  padding: 2rem;
+  background-color: rgba(255, 255, 255, 0.3);
+  backdrop-filter: blur(3px);
+  z-index: 100;
+
+
+
+
+  .modal-content {
+    background-color: var(--white);
+    box-shadow: var(--shadow);
+    width: 100%;
+    padding: 1rem;
+  }
 
   .second-line {
     justify-content: space-between;
