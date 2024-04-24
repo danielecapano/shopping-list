@@ -130,7 +130,7 @@ function ShoppingList() {
             
             <Articles items={items} setItems={setItems} modifyItem={modifyItem} isPriced={isPriced} />
            
-            <CartModal classes={isOpen ? 'cart-modal open' : 'cart-modal'} setIsOpen={setIsOpen} setItems={setItems} />
+            <CartModal classes={isOpen ? 'cart-modal open' : 'cart-modal'} isOpen={isOpen} setIsOpen={setIsOpen} setItems={setItems} />
 
             <Modal items={items} setItems={setItems} modalName={modalName} setModalName={setModalName} modalPrice={modalPrice} setModalPrice={setModalPrice} modalQuantity={modalQuantity} setModalQuantity={setModalQuantity} editingItem={editingItem} setEditingItem={setEditingItem} />
     
