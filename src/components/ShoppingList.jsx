@@ -94,13 +94,16 @@ function ShoppingList() {
   return (
     <main>
         <div className="container">
-            <h2 className="title">Lista della spesa</h2>
+            <motion.h2 className="title"
+            initial={{ opacity: 0, y: -20 }}
+            animate={{ opacity: 1, y: 0 }}
+            >Lista della spesa</motion.h2>
 
             <div className="insert-data">
                 <motion.input type="text"
                  initial={{ opacity: 0, x: -400 }}
                  animate={{ opacity: 1, x: 0 }}
-                //  transition={{ duration: 0.3 }}
+                 transition={{ duration: 0.3, delay: 0.1 }}
                 className="input-name"
                 value={name}
                 onChange={nameChange}
@@ -119,7 +122,7 @@ function ShoppingList() {
                     <motion.div className="quantity"
                      initial={{ opacity: 0, x: -400 }}
                      animate={{ opacity: 1, x: 0 }}
-                     transition={{ duration: 0.3, delay: 0.4 }}
+                     transition={{ duration: 0.3, delay: 0.3 }}
                     >
                         <button className="btn-minus" onClick={removeQuantity}>
                             <FontAwesomeIcon icon={faMinus}/>
@@ -138,7 +141,7 @@ function ShoppingList() {
                     <motion.button className="btn-add" onClick={addToList}
                     initial={{ opacity: 0, x: 200 }}
                     animate={{ opacity: 1, x: 0 }}
-                    transition={{ duration: 0.3, delay: 0.6}}
+                    transition={{ duration: 0.3, delay: 0.4}}
                     >
                         Aggiungi
                     </motion.button>

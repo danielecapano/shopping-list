@@ -1,6 +1,8 @@
 /* eslint-disable react/prop-types */
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCartShopping } from "@fortawesome/free-solid-svg-icons";
+import { motion } from "framer-motion";
+
 
 function Cart({items, isPriced, setIsOpen}) {
     const totalPrice = items.reduce((acc, el) => {
@@ -12,7 +14,11 @@ function Cart({items, isPriced, setIsOpen}) {
     }, 0);
     
   return (
-    <div className="cart">
+    <motion.div className="cart"
+    initial={{ opacity: 0, y: 50}}
+    animate={{ opacity: 1, y: 0}}
+    transition={{ duration: 0.3, delay: 0.5}}
+    >
                 {items.length > 0 && 
                     <>
                         <div className="icon">
@@ -34,7 +40,7 @@ function Cart({items, isPriced, setIsOpen}) {
                         <div className="total">Il tuo carrello è vuoto</div>
                     </>
                 )}
-            </div>
+            </motion.div>
   )
 }
 
