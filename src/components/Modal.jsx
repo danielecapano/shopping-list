@@ -17,7 +17,7 @@ function Modal({items, setItems, modalName, setModalName, modalPrice, setModalPr
             ...updatedItems[editingItem],
             name: modalName,
             price: parseFloat(modalPrice),
-            quantity: modalQuantity
+            quantity: parseInt(modalQuantity)
         };
         setItems(updatedItems);
         setEditingItem(null);
@@ -43,57 +43,59 @@ function Modal({items, setItems, modalName, setModalName, modalPrice, setModalPr
     };
 
   return (
-    <>
+    <AnimatePresence>
         {editingItem !== null && (
-            <div 
+            <motion.div className="modal"
+            initial={{ opacity: 0}}
+            animate={{ opacity: 1}}
+            exit={{ opacity: 0}}
             
-            className="modal">
-                <AnimatePresence>
-                    <motion.div className="modal-content"
-                    initial={{ opacity: 0, scale: 0.5 }}
-                    animate={{ opacity: 1, scale: 1 }}
-                    transition={{ duration: 0.3, type: "spring", stiffness: 500, damping: 20 }}
-                    exit={{ opacity: 0, scale: 0.5 }}
-                    
-                    >
-                        <h3 className="title">Modifica articolo</h3>
+            >
+                
+                <motion.div className="modal-content"
+                initial={{ opacity: 0, scale: 0.5 }}
+                animate={{ opacity: 1, scale: 1 }}
+                transition={{ duration: 0.3, type: "spring", stiffness: 500, damping: 20 }}
+                exit={{ opacity: 0, scale: 0.5 }}
+                >
+                    <h3 className="title">Modifica articolo</h3>
+                    <input type="text"
+                    className="input-name"
+                    value={modalName}
+                    onChange={(e) => setModalName(e.target.value)}
+                    placeholder="Cosa vuoi comprare?"/>
+
+                    <div className="second-line">
                         <input type="text"
-                        className="input-name"
-                        value={modalName}
-                        onChange={(e) => setModalName(e.target.value)}
-                        placeholder="Cosa vuoi comprare?"/>
-    
-                        <div className="second-line">
-                            <input type="number"
-                            className="input-price"
-                            value={modalPrice}
-                            onChange={(e) => setModalPrice(e.target.value)}
-                            placeholder="Prezzo"/>
-    
-                            <div className="quantity">
-                                <button className="btn-minus" onClick={removeModalQuantity}>
-                                    <FontAwesomeIcon icon={faMinus}/>
-                                </button>
-                                <input type="number"
-                                className="input-quantity"
-                                onChange={(e) => setModalQuantity(e.target.value)}
-                                value={modalQuantity} />
-                                <button className="btn-plus" onClick=       {addModalQuantity}>
-                                    <FontAwesomeIcon icon={faPlus}/>
-                                </button>
-                            </div>
+                        className="input-price"
+                        value={modalPrice}
+                        onChange={(e) => setModalPrice(e.target.value)}
+                        placeholder="Prezzo"/>
+
+                        <div className="quantity">
+                            <button className="btn-minus" onClick={removeModalQuantity}>
+                                <FontAwesomeIcon icon={faMinus}/>
+                            </button>
+                            <input type="text"
+                            className="input-quantity"
+                            onChange={(e) => setModalQuantity(e.target.value)}
+                            value={modalQuantity} />
+                            <button className="btn-plus" onClick={addModalQuantity}>
+                                <FontAwesomeIcon icon={faPlus}/>
+                            </button>
                         </div>
-                    
-                        {/* Pulsante per salvare le modifiche */}
-                        <div className="buttons">
-                            <button className="btn-reset" onClick={resetModifiedItem}>Annulla</button>
-                            <button className="btn-modify" onClick={saveModifiedItem}>Salva</button>
-                        </div>
-                    </motion.div>
-                </AnimatePresence>
-            </div>
+                    </div>
+                
+                    {/* Pulsante per salvare le modifiche */}
+                    <div className="buttons">
+                        <button className="btn-reset" onClick={resetModifiedItem}>Annulla</button>
+                        <button className="btn-modify" onClick={saveModifiedItem}>Salva</button>
+                    </div>
+                </motion.div>
+                
+            </motion.div>
         )}
-    </>
+    </AnimatePresence>
   )
 }
 

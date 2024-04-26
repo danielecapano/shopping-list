@@ -8,6 +8,7 @@ import CartModal from "./CartModal";
 import Cart from "./Cart";
 import Modal from "./Modal";
 import Articles from "./Articles";
+import { motion } from "framer-motion";
 
 
 
@@ -39,7 +40,7 @@ function ShoppingList() {
             const newItem = {
                 name: name,
                 price: parseFloat(price),
-                quantity: quantity,
+                quantity: parseInt(quantity),
                 completed: false
             }
             setItems((items) => [...items, newItem]);
@@ -96,25 +97,35 @@ function ShoppingList() {
             <h2 className="title">Lista della spesa</h2>
 
             <div className="insert-data">
-                <input type="text"
+                <motion.input type="text"
+                 initial={{ opacity: 0, x: -400 }}
+                 animate={{ opacity: 1, x: 0 }}
+                //  transition={{ duration: 0.3 }}
                 className="input-name"
                 value={name}
                 onChange={nameChange}
                 placeholder="Cosa vuoi comprare?"/>
         
                 <div className="second-line">
-                    <input type="number"
+                    <motion.input type="text"
+                     initial={{ opacity: 0, x: -400 }}
+                     animate={{ opacity: 1, x: 0 }}
+                     transition={{ duration: 0.3, delay: 0.2 }}
                     className="input-price"
                     value={price}
                     onChange={priceChange}
                     placeholder="Prezzo"/>
             
-                    <div className="quantity">
+                    <motion.div className="quantity"
+                     initial={{ opacity: 0, x: -400 }}
+                     animate={{ opacity: 1, x: 0 }}
+                     transition={{ duration: 0.3, delay: 0.4 }}
+                    >
                         <button className="btn-minus" onClick={removeQuantity}>
                             <FontAwesomeIcon icon={faMinus}/>
                         </button>
                         
-                        <input type="number"
+                        <input type="text"
                          className="input-quantity"
                          onChange={quantityChange}
                          value={quantity} />
@@ -122,9 +133,15 @@ function ShoppingList() {
                         <button className="btn-plus" onClick={addQuantity}>
                             <FontAwesomeIcon icon={faPlus}/>
                         </button>
-                    </div>
+                    </motion.div>
             
-                    <button className="btn-add" onClick={addToList}>Aggiungi</button>
+                    <motion.button className="btn-add" onClick={addToList}
+                    initial={{ opacity: 0, x: 200 }}
+                    animate={{ opacity: 1, x: 0 }}
+                    transition={{ duration: 0.3, delay: 0.6}}
+                    >
+                        Aggiungi
+                    </motion.button>
                 </div>
             </div>
             
