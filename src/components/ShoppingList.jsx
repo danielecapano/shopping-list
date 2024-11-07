@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faPlus, faMinus } from "@fortawesome/free-solid-svg-icons";
 
@@ -10,25 +11,8 @@ import { motion } from "framer-motion";
 import { v4 as uuid } from "uuid";
 import { useTodo } from "../context/todoContext";
 
-// const isValidInput = (input) => {
-//   const regex = /^\d*\.?\d*$/;
-//   return regex.test(input);
-// };
-
 function ShoppingList() {
-  const { todos, dispatch } = useTodo();
-  const [items, setItems] = useState(() => {
-    const storedItems = localStorage.getItem("shoppingList");
-    return storedItems ? JSON.parse(storedItems) : [];
-  });
-  // const [name, setName] = useState("");
-  // const [price, setPrice] = useState('');
-  // const [quantity, setQuantity] = useState(1);
-  const [editingItem, setEditingItem] = useState(null);
-  const [modalName, setModalName] = useState("");
-  const [modalPrice, setModalPrice] = useState("");
-  const [modalQuantity, setModalQuantity] = useState(1);
-  const [isOpen, setIsOpen] = useState(false);
+  const { todos, dispatch, selectedItem, isOpenModal } = useTodo();
 
   const [newTodo, setNewTodo] = useState({
     text: "",
@@ -37,7 +21,7 @@ function ShoppingList() {
     isCompleted: false,
   });
 
-  const { text, price, quantity, isCompleted } = newTodo;
+  const { text, price, quantity } = newTodo;
   console.log(text, price);
 
   const addQuantity = () => {
@@ -58,20 +42,13 @@ function ShoppingList() {
   const handleChange = (e) => {
     const { name, value } = e.target;
 
-    // Gestione speciale per i campi price e quantity
     if (name === "price" || name === "quantity") {
-      // Se l'input è numerico, convertilo, altrimenti mantieni il valore vuoto o 0
-      //   const numericValue = value === "" ? "" : parseFloat(value);
-
-      // Aggiorna solo price e quantity, gli altri campi vengono gestiti normalmente
       setNewTodo((prevTodo) => ({
         ...prevTodo,
         [name]: value === "" ? 0 : parseFloat(value),
-        // Gestisce NaN e assicura che il valore sia un numero
       }));
       console.log(isNaN(price));
     } else {
-      // Per gli altri campi, non modificare il valore
       setNewTodo((prevTodo) => ({
         ...prevTodo,
         id: uuid(),
@@ -82,67 +59,28 @@ function ShoppingList() {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    dispatch({ type: "addTodo", payload: newTodo });
+    if (text.trim()) {
+      dispatch({ type: "addTodo", payload: newTodo });
 
-    console.log(newTodo);
+      console.log(newTodo);
+      setNewTodo({
+        text: "",
+        price: "",
+        quantity: 1,
+        isCompleted: false,
+      });
+    }
   };
+  useEffect(() => {
+    const storedItems = JSON.parse(localStorage.getItem("shoppingList"));
+    if (storedItems) {
+      dispatch({ type: "savedTodos", payload: storedItems });
+    }
+  }, []);
 
-  // useEffect(() => {
-  //     localStorage.setItem("shoppingList", JSON.stringify(items));
-  // }, [items]);
-
-  // const addToList = () => {
-  //     if(name !== ''){
-
-  //         const newItem = {
-  //             name: name,
-  //             price: parseFloat(price),
-  //             quantity: parseInt(quantity),
-  //             completed: false
-  //         }
-  //         setItems((items) => [...items, newItem]);
-  //         console.log(items);
-  //         setName('');
-  //         setPrice('')
-  //         setQuantity(1)
-  //     }
-
-  // }
-
-  // const nameChange = (e) => {setName(e.target.value)}
-
-  // const priceChange = (e) => {setPrice(e.target.value);}
-
-  // const quantityChange = (e) => {setQuantity(e.target.value);}
-
-  // const modifyItem = (index) => {
-  //     const item = items[index];
-  //     setEditingItem(index);
-  //     // Popola gli stati della modale con i valori dell'elemento corrente
-  //     setModalName(item.name);
-  //     setModalPrice(item.price);
-  //     setModalQuantity(item.quantity);
-  // }
-
-  // const addQuantity = () => setQuantity((prev) => prev + 1);
-
-  // const removeQuantity = () => {
-  //     setQuantity((prev) => {
-  //         if (prev > 1) {
-  //             return prev - 1;
-  //         } else {
-  //             return 1;
-  //         }
-  //     })
-  // };
-
-  // const isPriced = (price) => {
-  //     if(isNaN(price)) {
-  //         return parseFloat(0).toFixed(2);
-  //     } else {
-  //         return parseFloat(price).toFixed(2);
-  //     }
-  // }
+  useEffect(() => {
+    localStorage.setItem("shoppingList", JSON.stringify(todos));
+  }, [todos]);
 
   return (
     <main>
@@ -199,6 +137,7 @@ function ShoppingList() {
                 name='quantity'
                 value={quantity}
                 onChange={handleChange}
+                readOnly
               />
 
               <button className='btn-plus' onClick={addQuantity}>
@@ -220,27 +159,11 @@ function ShoppingList() {
 
         <Articles />
 
-        <CartModal
-          classes={isOpen ? "cart-modal open" : "cart-modal"}
-          isOpen={isOpen}
-          setIsOpen={setIsOpen}
-          setItems={setItems}
-        />
+        {isOpenModal && <CartModal />}
 
-        <Modal
-          items={items}
-          setItems={setItems}
-          modalName={modalName}
-          setModalName={setModalName}
-          modalPrice={modalPrice}
-          setModalPrice={setModalPrice}
-          modalQuantity={modalQuantity}
-          setModalQuantity={setModalQuantity}
-          editingItem={editingItem}
-          setEditingItem={setEditingItem}
-        />
+        {selectedItem && <Modal />}
 
-        {/* <Cart items={items} isPriced={isPriced} setIsOpen={setIsOpen} /> */}
+        <Cart />
       </div>
     </main>
   );
