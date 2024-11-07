@@ -1,5 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Lexend+Deca:wght@100..900&display=swap');
-
+@import url("https://fonts.googleapis.com/css2?family=Lexend+Deca:wght@100..900&display=swap");
 
 :root {
   --bg-color: hsl(61, 81%, 67%);
@@ -54,7 +53,6 @@ body {
 main {
   height: 100vh;
   /* overfl ow: hidden; */
-
 }
 
 .container {
@@ -87,17 +85,22 @@ input::placeholder {
   color: var(--light-gray);
 }
 
-input::-webkit-outer-spin-button,
-input::-webkit-inner-spin-button {
+/* Per Chrome, Safari, Edge, Opera */
+input[type="number"]::-webkit-outer-spin-button,
+input[type="number"]::-webkit-inner-spin-button {
   -webkit-appearance: none;
   margin: 0;
+}
+
+/* Per Firefox */
+input[type="number"] {
+  appearance: none;
+  -moz-appearance: textfield;
 }
 
 .input-name {
   width: 100%;
   margin-bottom: 1rem;
-
-
 }
 
 .second-line {
@@ -157,7 +160,6 @@ input::-webkit-inner-spin-button {
   scrollbar-width: none;
 }
 
-
 .article {
   display: flex;
   align-items: center;
@@ -175,7 +177,6 @@ input::-webkit-inner-spin-button {
     background-color: var(--light-blue);
     text-decoration: line-through;
   }
-
 
   .btn-checked {
     display: flex;
@@ -227,12 +228,7 @@ input::-webkit-inner-spin-button {
       display: flex;
       align-items: center;
       justify-content: space-between;
-
-
-
-
     }
-
   }
 
   .buttons {
@@ -240,7 +236,6 @@ input::-webkit-inner-spin-button {
     display: flex;
     align-items: center;
     gap: 0.75rem;
-
 
     .btn-remove,
     .btn-mod {
@@ -260,9 +255,6 @@ input::-webkit-inner-spin-button {
   background-color: rgba(255, 255, 255, 0.3);
   backdrop-filter: blur(3px);
   z-index: 100;
-
-
-
 
   .modal-content {
     background-color: var(--white);
@@ -346,7 +338,6 @@ input::-webkit-inner-spin-button {
     border-radius: 0.5rem;
     background-color: var(--blue);
     color: var(--white);
-
   }
 
   .btn-delete {
@@ -368,8 +359,6 @@ input::-webkit-inner-spin-button {
   background-color: rgba(255, 255, 255, 0.3);
   backdrop-filter: blur(3px);
   z-index: 100;
-
-
 
   .modal-content {
     padding: 1rem;
