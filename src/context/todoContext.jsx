@@ -12,7 +12,14 @@ const todoReducer = (state, action) => {
     case "savedTodos":
       return action.payload;
     case "addTodo":
-      return [...state, action.payload];
+      return [
+        ...state,
+        {
+          ...action.payload,
+          price:
+            action.payload.price === "" ? 0 : parseFloat(action.payload.price),
+        },
+      ];
 
     case "removeTodo":
       return state.filter((todo) => todo.id !== action.payload);
@@ -23,7 +30,10 @@ const todoReducer = (state, action) => {
           ? {
               ...todo,
               text: action.payload.text,
-              price: action.payload.price,
+              price:
+                action.payload.price === ""
+                  ? 0
+                  : parseFloat(action.payload.price),
               quantity: action.payload.quantity,
             }
           : todo

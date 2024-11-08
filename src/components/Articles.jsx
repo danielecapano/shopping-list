@@ -64,7 +64,7 @@ function Articles() {
               <div className='article__details'>
                 <span className='article__name'>{item.text}</span>
                 <span className='article__quantity'>
-                  {item.quantity} X &euro; {item.price}
+                  {item.quantity} X &euro; {item.price?.toFixed(2)}
                 </span>
               </div>
 

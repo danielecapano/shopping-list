@@ -22,7 +22,7 @@ function ShoppingList() {
   });
 
   const { text, price, quantity } = newTodo;
-  console.log(text, price);
+  console.log(text, price, todos);
 
   const addQuantity = () => {
     setNewTodo((prevTodo) => ({
@@ -42,19 +42,18 @@ function ShoppingList() {
   const handleChange = (e) => {
     const { name, value } = e.target;
 
-    if (name === "price" || name === "quantity") {
-      setNewTodo((prevTodo) => ({
-        ...prevTodo,
-        [name]: value === "" ? 0 : parseFloat(value),
-      }));
-      console.log(isNaN(price));
-    } else {
-      setNewTodo((prevTodo) => ({
-        ...prevTodo,
-        id: uuid(),
-        [name]: value,
-      }));
-    }
+    // if (name === "price" || name === "quantity") {
+    //   setNewTodo((prevTodo) => ({
+    //     ...prevTodo,
+    //     [name]: value === "" ? 0 : parseFloat(value),
+    //   }));
+    //   console.log(isNaN(price));
+    // } else {
+    setNewTodo((prevTodo) => ({
+      ...prevTodo,
+      id: uuid(),
+      [name]: value,
+    }));
   };
 
   const handleSubmit = (e) => {
@@ -108,14 +107,14 @@ function ShoppingList() {
 
           <div className='second-line'>
             <motion.input
-              type='number'
-              step={0.01}
+              type='text'
+              inputMode='numeric'
               initial={{ opacity: 0, x: -400 }}
               animate={{ opacity: 1, x: 0 }}
               transition={{ duration: 0.3, delay: 0.2 }}
               className='input-price'
               name='price'
-              value={price || ""}
+              value={price}
               onChange={handleChange}
               pattern='^\d*\.?\d*$'
               placeholder='Prezzo'

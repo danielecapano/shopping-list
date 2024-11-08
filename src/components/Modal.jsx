@@ -13,19 +13,18 @@ function Modal() {
   const handleChange = (e) => {
     const { name, value } = e.target;
 
-    if (name === "price" || name === "quantity") {
-      setSelectedItem((prevTodo) => ({
-        ...prevTodo,
-        [name]: value === "" ? 0 : parseFloat(value),
-      }));
-      console.log(isNaN(price));
-    } else {
-      setSelectedItem((prevTodo) => ({
-        ...prevTodo,
+    // if (name === "price" || name === "quantity") {
+    //   setSelectedItem((prevTodo) => ({
+    //     ...prevTodo,
+    //     [name]: isNaN(value) ? 0 : parseFloat(value),
+    //   }));
+    //   console.log(isNaN(price));
+    // } else {
+    setSelectedItem((prevTodo) => ({
+      ...prevTodo,
 
-        [name]: value,
-      }));
-    }
+      [name]: value,
+    }));
   };
 
   const handleSubmit = (e) => {
@@ -83,10 +82,11 @@ function Modal() {
 
           <div className='second-line'>
             <input
-              type='number'
+              type='text'
+              inputMode='numeric'
               className='input-price'
               name='price'
-              value={price || ""}
+              value={price}
               onChange={handleChange}
               placeholder='Prezzo'
             />
