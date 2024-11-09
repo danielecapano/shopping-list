@@ -103,6 +103,7 @@ function ShoppingList() {
             value={text}
             onChange={handleChange}
             placeholder='Cosa vuoi comprare?'
+            autoComplete='off'
           />
 
           <div className='second-line'>
@@ -118,6 +119,7 @@ function ShoppingList() {
               onChange={handleChange}
               pattern='^\d*\.?\d*$'
               placeholder='Prezzo'
+              autoComplete='off'
             />
 
             <motion.div

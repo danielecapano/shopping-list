@@ -78,6 +78,7 @@ function Modal() {
             value={text}
             onChange={handleChange}
             placeholder='Cosa vuoi comprare?'
+            autoComplete='off'
           />
 
           <div className='second-line'>
@@ -89,6 +90,7 @@ function Modal() {
               value={price}
               onChange={handleChange}
               placeholder='Prezzo'
+              autoComplete='off'
             />
 
             <div className='quantity'>
